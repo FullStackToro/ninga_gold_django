@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+             {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style_game.css' %}">
+</head>
+<body>
+<div class="main">
+
+    <h1 id="title">NINJA GOLD</h1><hr>
+    <p>Cuando comienzas el juego, tu ninja debe tener 0 de oro. El ninja puede ir a diferentes lugares (granja, cueva, casa, casino) y ganar diferentes cantidades de oro. En el caso de un casino, tu ninja puede ganar o perder hasta 50 de oro. Tu trabajo es crear una aplicación web que permita a este ninja ganar oro y mostrar las actividades pasadas de este ninja.</p>
+
+    <div class="container">
+        <div id="row">
+
+                    <label for="gold">Your gold: </label>
+                    <input type="text" id="gold" name="gold" value= {{ request.session.counter }}>
+
+        </div>
+            <div class="ventana">
+                <form action="/process/farm" method="post">
+                    {% csrf_token %}
+                    <h1>Farm</h1>
+                    <p>earns 10-20 golds</p>
+                    <input type="hidden" value="farm" name="name">
+                    <button type="submit" class="sbmt">Find Gold!</button>
+                </form>
+            </div>
+            <div class="ventana">
+                <form action="/process/cave" method="post">
+                    {% csrf_token %}
+                    <h1>Cave</h1>
+                    <p>earns 5-10 golds</p>
+                    <input type="hidden" value="cave" name="name">
+                    <button type="submit" class="sbmt">Find Gold!</button>
+                </form>
+            </div>
+             <div class="ventana">
+                <form action="/process/house" method="post">
+                    {% csrf_token %}
+                    <h1>House</h1>
+                    <p>earns 2-5 golds</p>
+                    <input type="hidden" value="house" name="name">
+                    <button type="submit" class="sbmt">Find Gold!</button>
+                </form>
+            </div>
+            <div class="ventana">
+                <form action="/process/casino" method="post">
+                    {% csrf_token %}
+                    <h1>Casino</h1>
+                    <p>earns 0-50 golds</p>
+                    <input type="hidden" value="casino" name="name">
+                    <button type="submit" class="sbmt">Find Gold!</button>
+                </form>
+            </div>
+
+        <h3>Actividades</h3>
+
+        <div class="activities">
+             <pre id="pre"> {{ request.session.display }} </pre>
+        </div>
+    </div>
+</div>
+</body>
+</html>

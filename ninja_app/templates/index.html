@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+             {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style_index.css' %}">
+</head>
+<body>
+<div class="main">
+
+    <h1 id="title">NINJA GOLD</h1><hr>
+    <p>Cuando comienzas el juego, tu ninja debe tener 0 de oro. El ninja puede ir a diferentes lugares (granja, cueva, casa, casino) y ganar diferentes cantidades de oro. En el caso de un casino, tu ninja puede ganar o perder hasta 50 de oro. Tu trabajo es crear una aplicación web que permita a este ninja ganar oro y mostrar las actividades pasadas de este ninja.</p>
+
+    <div class="c1">
+
+            <div class="ventana1">
+                <form action="/game" method="post">
+                    {% csrf_token %}
+                    <h1>Condiciones de Victoria</h1>
+                    <p>Ingrese la cantidad de oro (gold) a ganar para finalizar el juego</p>
+                    <input type="number" value="" name="win" required="required">
+                    <button type="submit" class="sbmt">Comenzar</button>
+                </form>
+            </div>
+
+    </div>
+</div>
+</body>
+</html>
