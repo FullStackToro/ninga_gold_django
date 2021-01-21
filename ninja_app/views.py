@@ -1,6 +1,8 @@
 from django.shortcuts import render
 import random
 from datetime import datetime
+from django.http import JsonResponse
+
 
 def index(request):
 
@@ -15,6 +17,7 @@ def game(request):
 
 def process_money(request, op):
     temp=time()
+    request.session['count_2'] += 1
     if op == 'farm':
         gold=round(random.random()*(20-10)+10)
         request.session['counter'] += gold
@@ -31,20 +34,23 @@ def process_money(request, op):
         print('No válido')
 
     if gold>0:
-        request.session['display'] += f'Ha ganado {gold} desde {op}!'
+        request.session['display'] += f'<div class="gano">Ha ganado {gold} desde {op}!'
     elif gold == 0:
         request.session['display'] += f'Ha entrado a {op}. Su saldo se mantiene igual!'
     else:
-        request.session['display'] += f'Ha entrado a {op} y ha pérdido {abs(gold)}... Ouch..'
+        request.session['display'] += f'<div class="perdio">Ha entrado a {op} y ha pérdido {abs(gold)}... Ouch..'
 
 
-    request.session['display'] += f"({temp[0]} {temp[1]},  {temp[2]} - {temp[3]}:{temp[4]})\n"
+
+    context={
+        'array':{'id':100, 'id':200, 'asd':300}
+    }
+
+    request.session['display'] += f"({temp[0]} {temp[1]},  {temp[2]} - {temp[3]}:{temp[4]})</div>\n"
     ruta ='game.html'
 
-    if int(request.session['counter']) >= int(request.session['win']):
-        ruta = 'winner.html'
+    return render(request, ruta, context)
 
-    return render(request, ruta)
 
 def time():
     now = datetime.now()

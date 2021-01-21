@@ -59,9 +59,18 @@
         <h3>Actividades</h3>
 
         <div class="activities">
-             <pre id="pre"> {{ request.session.display }} </pre>
+            {% for x in array %}
+                {% if x == 'id'%}
+                    {% print('prueba ')%}
+                    <div class="ensayo">{{ array.id }}</div><br>
+
+                {% endif %}
+            {% endfor %}
         </div>
+
+
     </div>
 </div>
 </body>
 </html>
+
